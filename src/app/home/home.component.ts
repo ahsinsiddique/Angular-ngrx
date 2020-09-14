@@ -25,12 +25,7 @@ export class HomeComponent implements OnInit {
   getData() {
     this.store.dispatch(new GetEvent());
     this.store.select('events').subscribe(response => {
-
-      console.log(response);
       this.events = response.events;
-
-      setTimeout(() => {
-      }, 2000);
 
     }, error => {
       console.log(error);
