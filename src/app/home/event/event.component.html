@@ -1,24 +1,28 @@
 <ng-container *ngIf="!isAddEvent && event; else addEventTemplate">
-  <div class="event-title">
-    <p>Picture</p>
-  </div>
+  <div (click)="onEventSelected(event)">
 
 
-  <div class="mt-5 container" style="background: #DD005D; min-height: 98px; max-height: 98px">
-    <div class="row d-flex justify-content-center">
-      <div class="mt-1 ">
-        <p class=" font-weight-bold name "> {{event.name}}</p>
+    <div class="event-title">
+      <p>Picture</p>
+    </div>
+
+
+    <div class="mt-5 container" style="background: #DD005D; min-height: 98px; max-height: 98px">
+      <div class="row d-flex justify-content-center">
+        <div class="mt-1 ">
+          <p class=" font-weight-bold name "> {{event.name}}</p>
+        </div>
       </div>
+      <div class="row d-flex mt-4">
+
+        <p class="justify-content-start ml-2 text-oveflow"
+           style="max-width: 135px; min-width: 62px">{{event.address}}</p>
+        <p style="margin-left: auto" class="justify-content-end">{{event.date}}</p>
+
+      </div>
+
     </div>
-    <div class="row d-flex mt-4">
-
-      <p class="justify-content-start ml-2 text-oveflow" style="max-width: 135px; min-width: 62px">{{event.address}}</p>
-      <p style="margin-left: auto" class="justify-content-end">{{event.date}}</p>
-
-    </div>
-
   </div>
-
 </ng-container>
 
 

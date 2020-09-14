@@ -18,8 +18,8 @@ export class HomeComponent implements OnInit {
     this.getData();
   }
 
-  addNewEvent(event: Event) {
-    this.store.dispatch(new AddEvent(event));
+  onEventSelected(event: Event) {
+    console.log('event selected: ' + event);
   }
 
   getData() {

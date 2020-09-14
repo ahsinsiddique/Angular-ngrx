@@ -12,10 +12,8 @@ import { AddEvent, GetEvent } from '../feature-module/event.actions';
 })
 export class AddEventComponent implements OnInit {
   eventForm: FormGroup;
+  isFormSubmit = false;
   @Output() onAddEvent = new EventEmitter<Event>();
-  // name: string;
-  // date: string;
-  // address: string;
   events = [];
   newEvent: Event = new Event();
   eventId: number;
@@ -57,7 +55,11 @@ export class AddEventComponent implements OnInit {
 
 
   onSubmit() {
+    this.isFormSubmit = true;
+
     if (this.eventForm.valid) {
+      this.isFormSubmit = false;
+      this.eventForm.reset();
       this.store.dispatch(new AddEvent(this.newEvent));
     }
   }
