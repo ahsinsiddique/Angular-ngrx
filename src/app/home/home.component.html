@@ -1,0 +1,20 @@
+<h5 class="ml-3 mt-4">Home</h5>
+
+
+<div class="row m-3">
+  <div class="col-2 event p-0" *ngFor="let event of events">
+
+    <app-event [event]="event"></app-event>
+
+  </div>
+  <!--===================================-->
+  <!--===================================-->
+  <div class="col-2 event p-0">
+
+    <app-event [isAddEvent]="true"></app-event>
+
+  </div>
+
+
+
+</div>
