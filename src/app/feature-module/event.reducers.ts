@@ -11,12 +11,14 @@ export function eventReducer(state = initialState, action: EventsActions) {
     }
 
     case EventsActionType.ADD_Events: {
-      let events = [];
-      events = state.events;
-      events.push(action.payload);
       return {
-        ...state,
-        events
+        ...state
+      };
+    }
+    case EventsActionType.ADD_Events_SUCCESS: {
+      return {
+        events: action.payload,
+        ...state
       };
     }
     case EventsActionType.GET_Events_SUCCESS: {

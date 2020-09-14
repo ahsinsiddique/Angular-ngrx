@@ -19,8 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   addNewEvent(event: Event) {
-    // this.ser.addNewEvent(event);
-     this.store.dispatch(new AddEvent(event));
+    this.store.dispatch(new AddEvent(event));
   }
 
   getData() {
@@ -37,5 +36,6 @@ export class HomeComponent implements OnInit {
       console.log(error);
     });
   }
+
 
 }

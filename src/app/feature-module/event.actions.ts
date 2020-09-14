@@ -4,6 +4,7 @@ import { Event } from '../models/event';
 export enum EventsActionType {
   GET_Events = 'GET_Events',
   ADD_Events = 'ADD_Events',
+  ADD_Events_SUCCESS = 'ADD_Events_SUCCESS',
   GET_Events_SUCCESS = 'GET_Events_SUCCESS',
   GET_Events_FAILED = 'GET_Events_FAILED'
 }
@@ -14,6 +15,13 @@ export class GetEvent implements Action {
 
 export class AddEvent implements Action {
   readonly type = EventsActionType.ADD_Events;
+
+  constructor(public payload: Event) { }
+}
+
+export class AddEventSuccess implements Action {
+  readonly type = EventsActionType.ADD_Events_SUCCESS;
+
   constructor(public payload: Event) { }
 }
 
@@ -31,5 +39,6 @@ export class GetEventFailed implements Action {
 
 export type EventsActions = GetEvent |
   AddEvent |
+  AddEventSuccess |
   GetEventSuccess |
   GetEventFailed;

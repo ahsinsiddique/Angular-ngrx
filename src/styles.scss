@@ -1,6 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
 
-/* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
 
@@ -26,4 +24,8 @@
 }
 app-event {
   width: 100%;
+}
+.text-oveflow {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }

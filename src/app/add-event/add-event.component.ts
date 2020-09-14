@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Event } from '../models/event';
 import { EventService } from '../services/event.service';
+import { Store } from '@ngrx/store';
+import { AddEvent, GetEvent } from '../feature-module/event.actions';
 
 @Component({
   selector: 'app-add-event',
@@ -11,14 +13,16 @@ import { EventService } from '../services/event.service';
 export class AddEventComponent implements OnInit {
   eventForm: FormGroup;
   @Output() onAddEvent = new EventEmitter<Event>();
-  name: string;
-  date: string;
-  address: string;
-
+  // name: string;
+  // date: string;
+  // address: string;
+  events = [];
   newEvent: Event = new Event();
+  eventId: number;
 
   constructor(private fb: FormBuilder,
-              private ser: EventService) { }
+              private ser: EventService,
+              private store: Store<any>) { }
 
   ngOnInit(): void {
     this.eventForm = this.fb.group({
@@ -26,20 +30,36 @@ export class AddEventComponent implements OnInit {
       date: new FormControl(),
       address: new FormControl(),
     });
+    this.getData();
     this.eventForm.valueChanges.subscribe(val => {
       let values = this.eventForm.value;
 
-      this.newEvent = { name: values.name, date: values.date, address: values.address };
+      this.newEvent = { id: this.eventId, name: values.name, date: values.date, address: values.address };
     });
   }
 
+  getData() {
+    this.store.dispatch(new GetEvent());
+    this.store.select('events').subscribe(response => {
+      this.events = response.events;
+      this.eventId = this.computeEventId();
+    }, error => {
+      console.log(error);
+    });
+  }
+
+  computeEventId() {
+    if (this.events.length < 1) {
+      return 0;
+    }
+    return this.events.length + 1;
+  }
+
+
   onSubmit() {
     if (this.eventForm.valid) {
-      console.log(this.newEvent);
-      this.onAddEvent.emit(this.newEvent);
-      this.ser.addNewEvent(this.newEvent);
+      this.store.dispatch(new AddEvent(this.newEvent));
     }
-
   }
 
 }

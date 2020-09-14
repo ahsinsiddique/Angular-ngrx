@@ -10,6 +10,10 @@ import { EventComponent } from './home/event/event.component';
 import { IonicModule } from '@ionic/angular';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FeatureModule } from './feature-module/feature.module';
+import { HttpClientModule } from '@angular/common/http';
+import { environment } from '../environments/environment';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { EventsInMemDataService } from './services/events-in-mem-data.service';
 
 @NgModule({
   declarations: [
@@ -24,8 +28,10 @@ import { FeatureModule } from './feature-module/feature.module';
     NgbModule,
     IonicModule.forRoot(),
     ReactiveFormsModule,
-    FeatureModule
-
+    FeatureModule,
+    HttpClientModule,
+    environment.production ?
+      [] : InMemoryWebApiModule.forRoot(EventsInMemDataService)
   ],
   providers: [],
   bootstrap: [AppComponent]
